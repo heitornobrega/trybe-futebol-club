@@ -12,6 +12,7 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
+  // modi
   private config():void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
