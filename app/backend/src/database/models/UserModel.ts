@@ -1,12 +1,15 @@
 import { Model, STRING, INTEGER } from 'sequelize';
 import db from '.';
 
-class User extends Model {
-  id: number;
-  username: string;
+class UserSequelize extends Model {
+  id!: number;
+  username!: string;
+  email!: string;
+  password!: string;
+  role!: string;
 }
 
-User.init({
+UserSequelize.init({
   id: {
     type: INTEGER,
     allowNull: false,
@@ -17,10 +20,23 @@ User.init({
     type: STRING,
     allowNull: false,
   },
+  email: {
+    type: STRING,
+    allowNull: false,
+  },
+  password: {
+    type: STRING,
+    allowNull: false,
+  },
+  role: {
+    type: STRING,
+    allowNull: false,
+  },
 }, {
   sequelize: db,
   modelName: 'user',
   underscored: true,
+  timestamps: false,
 });
 
-export default User;
+export default UserSequelize;

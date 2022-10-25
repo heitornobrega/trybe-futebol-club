@@ -1,4 +1,7 @@
 import * as express from 'express';
+import error from './middlewares/error';
+import loginRouter from './routes/loginRouter';
+// import userRouter from './routes/userRouter';
 
 class App {
   public app: express.Express;
@@ -8,8 +11,11 @@ class App {
 
     this.config();
 
-    // Não remover essa rota
+    // Não remover essa rota.
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.routes();
+
+    this.app.use(error);
   }
 
   // modi
@@ -23,6 +29,10 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+  }
+
+  private routes(): void {
+    this.app.use('/login', loginRouter);
   }
 
   public start(PORT: string | number):void {
