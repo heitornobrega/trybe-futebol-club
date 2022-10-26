@@ -22,7 +22,6 @@ export default class LoginService {
 
   async getUserById(id: number) {
     const user = await this.repository.getByPk(id);
-    console.log(user);
     return user;
   }
 }

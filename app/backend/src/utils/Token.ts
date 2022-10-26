@@ -1,5 +1,5 @@
 import { Secret, sign } from 'jsonwebtoken';
-import { Role } from '../entities/User';
+import Role from '../entities/User';
 
 const { JWT_SECRET } = process.env;
 

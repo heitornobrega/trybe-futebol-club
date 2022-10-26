@@ -19,6 +19,7 @@ export default class LoginController {
       const user = await this.service.get(email, password);
       const { id } = user;
       const token = Token.generateToken(id, role);
+      console.log(typeof token);
       return res.status(200).json({ token });
     } catch (error) {
       next(error);
@@ -31,7 +32,8 @@ export default class LoginController {
       const payload = verify(authorization as string, JWT_SECRET as Secret) as IPayload;
       const { id } = payload;
       const user = await this.service.getUserById(id);
-      const role = user?.role;
+      if (!user) { throw new CustomError('User not found', 401); }
+      const { role } = user;
       return res.status(200).json({ role });
     } catch (error) {
       next(error);
