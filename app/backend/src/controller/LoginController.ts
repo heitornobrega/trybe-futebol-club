@@ -32,8 +32,7 @@ export default class LoginController {
       const payload = verify(authorization as string, JWT_SECRET as Secret) as IPayload;
       const { id } = payload;
       const user = await this.service.getUserById(id);
-      if (!user) { throw new CustomError('User not found', 401); }
-      const { role } = user;
+      const role = user?.role;
       return res.status(200).json({ role });
     } catch (error) {
       next(error);

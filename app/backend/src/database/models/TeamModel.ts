@@ -13,7 +13,7 @@ Team.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  homeTeam: {
+  teamName: {
     type: STRING,
     allowNull: false,
   },
@@ -22,6 +22,7 @@ Team.init({
   sequelize: db,
   modelName: 'Team',
   underscored: true,
+  timestamps: false,
 });
 
 export default Team;

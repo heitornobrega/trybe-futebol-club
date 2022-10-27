@@ -26,11 +26,12 @@ describe('Rotas', () => {
           .request(app)
           .post("/login")
           .send({ 
-            "email": "user@user.com",
-            "password": "secret_user"
+            email: "user@user.com",
+            password: "secret_user"
           });
         expect((await httpResponse).status).to.equal(200)
         expect((await httpResponse).body).to.be.an('object')
+        
         const token = (await httpResponse).body
         const httpResponse2 = chai
           .request(app)
@@ -75,7 +76,7 @@ describe('Rotas', () => {
           .send({
             "email": "user@user.com",
           });
-        expect((await httpResponse).status).to.equal(401)
+        expect((await httpResponse).status).to.equal(400)
       })
     })
 
