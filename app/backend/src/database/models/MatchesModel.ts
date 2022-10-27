@@ -5,6 +5,11 @@ import Team from './TeamModel';
 class Matche extends Model {
   id: number;
   username: string;
+  homeTeam: number;
+  homeTeamGoals: number;
+  awayTeam: number;
+  awayTeamGoals: number;
+  inProgress: number;
 }
 
 Matche.init({
@@ -38,9 +43,19 @@ Matche.init({
   sequelize: db,
   modelName: 'Matche',
   underscored: true,
+  timestamps: false,
 });
 
-Matche.hasOne(Team, { foreignKey: 'homeTeam', as: 'homeTeam' });
-Matche.hasOne(Team, { foreignKey: 'awayTeam', as: 'awayTeam' });
+Matche.hasOne(Team, {
+  sourceKey: 'homeTeam',
+  foreignKey: 'id',
+  as: 'teamHome',
+});
+
+Matche.hasOne(Team, {
+  sourceKey: 'awayTeam',
+  foreignKey: 'id',
+  as: 'teamAway',
+});
 
 export default Matche;
