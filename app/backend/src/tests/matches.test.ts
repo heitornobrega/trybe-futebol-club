@@ -14,22 +14,46 @@ const { expect } = chai;
 
 describe('Rotas', () => {
   describe('Rota GET /matches', () => {
-    it('deve retornar status 500', async () => {
+    it('deve retornar status 200', async () => {
       const httpResponse = chai.request(app).get('/matches');
       expect((await httpResponse).status).to.equal(200)
     })
   })
   describe('Rota GET /matches?inProgress=false', () => {
-    it('deve retornar status 500', async () => {
+    it('deve retornar status 200', async () => {
       const httpResponse = chai.request(app).get('/matches?inProgress=true');
       expect((await httpResponse).status).to.equal(200)
     })
   })
     
   describe('Rota GET /matches?inProgress=true', () => {
-    it('deve retornar status 500', async () => {
+    it('deve retornar status 200', async () => {
       const httpResponse = chai.request(app).get('/matches?inProgress=true');
       expect((await httpResponse).status).to.equal(200)
+    })
+  })
+  
+  describe('Rota POST /matches', () => {
+    it('deve retornar status 201', async () => {
+      const httpResponse =  chai
+      .request(app)
+      .post("/login")
+      .send({ 
+        email: "user@user.com",
+        password: "secret_user"
+      });
+    expect((await httpResponse).status).to.equal(200)
+     const token = (await httpResponse).body
+      const httpResponse2 = chai.request(app)
+        .post('/matches')
+        .send({
+          homeTeam: 16,
+          awayTeam: 8, 
+          homeTeamGoals: 2,
+          awayTeamGoals: 2,
+        })
+        .set('Authorization', token.token);
+      expect((await httpResponse2).status).to.equal(201)
     }) })
 
 });
