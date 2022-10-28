@@ -96,4 +96,30 @@ describe('Rotas', () => {
     })
   })
 
+
+
+  describe('Rota POST /matches', () => {
+    it('deve retornar status 422', async () => {
+      const httpResponse =  chai
+      .request(app)
+      .post("/login")
+      .send({ 
+        email: "user@user.com",
+        password: "secret_user"
+      });
+    expect((await httpResponse).status).to.equal(200)
+     const token = (await httpResponse).body
+      const httpResponse2 = chai.request(app)
+        .post('/matches')
+        .send({
+          homeTeam: 405,
+          awayTeam: 16, 
+          homeTeamGoals: 2,
+          awayTeamGoals: 2,
+        })
+        .set('Authorization', token.token);
+      expect((await httpResponse2).status).to.equal(404)
+    })
+  })
+
 });

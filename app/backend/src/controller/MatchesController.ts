@@ -37,8 +37,13 @@ export default class MatchesController {
     const payload = verify(authorization as string, JWT_SECRET as Secret) as IPayload;
     const { id } = payload;
     if (id) {
-      const startedGame = await this.service.createStartedGame(req.body);
-      return res.status(201).json(startedGame);
+      try {
+        const startedGame = await this.service.createStartedGame(req.body);
+        return res.status(201).json(startedGame);
+      } catch (error) {
+        const err = new CustomError('There is no team with such id!', 404);
+        return next(err);
+      }
     }
   };
 
