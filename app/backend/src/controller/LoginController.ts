@@ -19,7 +19,6 @@ export default class LoginController {
       const user = await this.service.get(email, password);
       const { id } = user;
       const token = Token.generateToken(id, role);
-      console.log(typeof token);
       return res.status(200).json({ token });
     } catch (error) {
       next(error);

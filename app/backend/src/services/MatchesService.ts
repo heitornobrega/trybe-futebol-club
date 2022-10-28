@@ -1,4 +1,5 @@
-import SequelizeMatchesRepository from '../repositories/SequelizeMatchesRepository';
+import SequelizeMatchesRepository,
+{ ICreateMatche } from '../repositories/SequelizeMatchesRepository';
 
 export default class MatchesService {
   constructor(private repository: SequelizeMatchesRepository) { }
@@ -16,5 +17,10 @@ export default class MatchesService {
   getAllFinished = async () => {
     const inProgressMatches = await this.repository.getAllFinished();
     return inProgressMatches;
+  };
+
+  createStartedGame = async (body: ICreateMatche) => {
+    const startedGame = await this.repository.createStartedGame(body);
+    return startedGame;
   };
 }
