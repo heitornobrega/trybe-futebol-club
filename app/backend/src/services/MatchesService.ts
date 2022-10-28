@@ -23,4 +23,9 @@ export default class MatchesService {
     const startedGame = await this.repository.createStartedGame(body);
     return startedGame;
   };
+
+  endGame = async (id: number) => {
+    await this.repository.endGame(id);
+    return { message: 'Finished' };
+  };
 }

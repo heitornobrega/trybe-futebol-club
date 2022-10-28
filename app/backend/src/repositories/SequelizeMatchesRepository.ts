@@ -51,4 +51,9 @@ export default class SequelizeMatchesRepository {
       }) as unknown as ICreateMatcheResponse;
     return startedGame;
   };
+
+  endGame = async (id: number) => {
+    const finished = await Matche.update({ inProgress: false }, { where: { id } });
+    return finished;
+  };
 }

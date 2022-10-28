@@ -1,5 +1,6 @@
 import { Response, Request, NextFunction } from 'express';
 import { Secret, verify } from 'jsonwebtoken';
+import CustomError from '../utils/CustomError';
 import MatchesService from '../services/MatchesService';
 import IPayload from '../utils/ICustomRequest';
 
@@ -24,7 +25,14 @@ export default class MatchesController {
     return res.status(200).json(inProgressMatches);
   };
 
-  createStartedGame = async (req: Request, res: Response) => {
+  createStartedGame = async (req: Request, res: Response, next: NextFunction) => {
+    if (req.body.homeTeam === req.body.awayTeam) {
+      const error = new CustomError(
+        'It is not possible to create a match with two equal teams',
+        422,
+      );
+      return next(error);
+    }
     const { authorization } = req.headers;
     const payload = verify(authorization as string, JWT_SECRET as Secret) as IPayload;
     const { id } = payload;
@@ -32,5 +40,12 @@ export default class MatchesController {
       const startedGame = await this.service.createStartedGame(req.body);
       return res.status(201).json(startedGame);
     }
+  };
+
+  endGame = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const idNumber = Number(id);
+    const finished = await this.service.endGame(idNumber);
+    return res.status(200).json(finished);
   };
 }
