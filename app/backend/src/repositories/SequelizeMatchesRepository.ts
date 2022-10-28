@@ -10,4 +10,24 @@ export default class SequelizeMatchesRepository {
     });
     return result;
   };
+
+  getInProgressMatch = async () => {
+    const result = await Matche.findAll({
+      include: [
+        { model: Team, as: 'teamHome', attributes: { exclude: ['id'] } },
+        { model: Team, as: 'teamAway', attributes: { exclude: ['id'] } }],
+      where: { inProgress: true },
+    });
+    return result;
+  };
+
+  getAllFinished = async () => {
+    const result = await Matche.findAll({
+      include: [
+        { model: Team, as: 'teamHome', attributes: { exclude: ['id'] } },
+        { model: Team, as: 'teamAway', attributes: { exclude: ['id'] } }],
+      where: { inProgress: false },
+    });
+    return result;
+  };
 }

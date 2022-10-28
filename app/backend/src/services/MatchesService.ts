@@ -7,4 +7,14 @@ export default class MatchesService {
     const allMatches = await this.repository.getAll();
     return allMatches;
   };
+
+  getAllInProgress = async () => {
+    const inProgressMatches = await this.repository.getInProgressMatch();
+    return inProgressMatches;
+  };
+
+  getAllFinished = async () => {
+    const inProgressMatches = await this.repository.getAllFinished();
+    return inProgressMatches;
+  };
 }
