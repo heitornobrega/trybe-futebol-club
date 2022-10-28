@@ -13,6 +13,12 @@ export interface ICreateMatcheResponse extends ICreateMatche{
   inProgress?: boolean
 }
 
+export interface IUpdateMatcheGoals {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+  id: number;
+}
+
 export default class SequelizeMatchesRepository {
   getAll = async () => {
     const result = Matche.findAll({
@@ -55,5 +61,11 @@ export default class SequelizeMatchesRepository {
   endGame = async (id: number) => {
     const finished = await Matche.update({ inProgress: false }, { where: { id } });
     return finished;
+  };
+
+  updateTeamsGoals = async (body: IUpdateMatcheGoals) => {
+    const { homeTeamGoals, awayTeamGoals, id } = body;
+    const result = await Matche.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return result;
   };
 }

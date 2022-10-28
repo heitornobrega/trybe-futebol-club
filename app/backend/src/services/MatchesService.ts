@@ -1,5 +1,5 @@
 import SequelizeMatchesRepository,
-{ ICreateMatche } from '../repositories/SequelizeMatchesRepository';
+{ ICreateMatche, IUpdateMatcheGoals } from '../repositories/SequelizeMatchesRepository';
 
 export default class MatchesService {
   constructor(private repository: SequelizeMatchesRepository) { }
@@ -27,5 +27,10 @@ export default class MatchesService {
   endGame = async (id: number) => {
     await this.repository.endGame(id);
     return { message: 'Finished' };
+  };
+
+  updateTeamsGoals = async (body: IUpdateMatcheGoals) => {
+    const result = await this.repository.updateTeamsGoals(body);
+    return result;
   };
 }
