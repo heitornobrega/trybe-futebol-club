@@ -1,10 +1,8 @@
 import { Response, Request, NextFunction } from 'express';
-import { Secret, verify } from 'jsonwebtoken';
+
 import CustomError from '../utils/CustomError';
 import MatchesService from '../services/MatchesService';
-import IPayload from '../utils/ICustomRequest';
-
-const { JWT_SECRET } = process.env;
+// import ICustomRequest from '../utils/ICustomRequest';
 
 export default class MatchesController {
   constructor(private service: MatchesService) { }
@@ -33,17 +31,12 @@ export default class MatchesController {
       );
       return next(error);
     }
-    const { authorization } = req.headers;
-    const payload = verify(authorization as string, JWT_SECRET as Secret) as IPayload;
-    const { id } = payload;
-    if (id) {
-      try {
-        const startedGame = await this.service.createStartedGame(req.body);
-        return res.status(201).json(startedGame);
-      } catch (error) {
-        const err = new CustomError('There is no team with such id!', 404);
-        return next(err);
-      }
+    try {
+      const startedGame = await this.service.createStartedGame(req.body);
+      return res.status(201).json(startedGame);
+    } catch (error) {
+      const err = new CustomError('There is no team with such id!', 404);
+      return next(err);
     }
   };
 

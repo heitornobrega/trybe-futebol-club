@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Secret, verify } from 'jsonwebtoken';
-import IPayload from '../utils/ICustomRequest';
+import IPayload from '../utils/ICustomPayload';
 import Token from '../utils/Token';
 import LoginService from '../services/LoginService';
 import CustomError from '../utils/CustomError';

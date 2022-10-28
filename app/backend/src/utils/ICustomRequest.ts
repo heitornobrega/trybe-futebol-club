@@ -1,5 +1,5 @@
-import { JwtPayload } from 'jsonwebtoken';
+import { Request } from 'express';
 
-export default interface IPayload extends JwtPayload{
+export default interface ICustomRequest extends Request{
   id: number;
 }
