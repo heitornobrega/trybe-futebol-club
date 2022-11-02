@@ -1,3 +1,4 @@
+import getAwayLeaderboard from '../utils/getAwayLeaderboard';
 import SequelizeMatchesRepository,
 { ICreateMatche, IUpdateMatcheGoals } from '../repositories/SequelizeMatchesRepository';
 import getHomeLeaderboard, { IFinalizedMatches } from '../utils/getHomeLeaderboard';
@@ -39,5 +40,11 @@ export default class MatchesService {
     const result = await this.repository.getAllFinished();
     const inHome = getHomeLeaderboard(result as unknown as IFinalizedMatches[]);
     return inHome;
+  };
+
+  getFinalizedAwayMatches = async () => {
+    const result = await this.repository.getAllFinished();
+    const away = getAwayLeaderboard(result as unknown as IFinalizedMatches[]);
+    return away;
   };
 }
