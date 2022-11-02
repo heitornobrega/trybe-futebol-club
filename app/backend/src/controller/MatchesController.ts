@@ -53,4 +53,9 @@ export default class MatchesController {
     await this.service.updateTeamsGoals(toUpdate);
     return res.status(200).json({ message: 'ok' });
   };
+
+  getFinalizedHomeMatches = async (req: Request, res: Response) => {
+    const finishedHomeMatches = await this.service.getFinalizedHomeMatches();
+    return res.status(200).json(finishedHomeMatches);
+  };
 }

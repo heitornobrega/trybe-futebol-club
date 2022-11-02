@@ -1,5 +1,6 @@
 import SequelizeMatchesRepository,
 { ICreateMatche, IUpdateMatcheGoals } from '../repositories/SequelizeMatchesRepository';
+import getHomeLeaderboard, { IFinalizedMatches } from '../utils/getHomeLeaderboard';
 
 export default class MatchesService {
   constructor(private repository: SequelizeMatchesRepository) { }
@@ -32,5 +33,11 @@ export default class MatchesService {
   updateTeamsGoals = async (body: IUpdateMatcheGoals) => {
     const result = await this.repository.updateTeamsGoals(body);
     return result;
+  };
+
+  getFinalizedHomeMatches = async () => {
+    const result = await this.repository.getAllFinished();
+    const inHome = getHomeLeaderboard(result as unknown as IFinalizedMatches[]);
+    return inHome;
   };
 }
