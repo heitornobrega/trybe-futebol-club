@@ -63,4 +63,9 @@ export default class MatchesController {
     const finishedAwayMatches = await this.service.getFinalizedAwayMatches();
     return res.status(200).json(finishedAwayMatches);
   };
+
+  getFinalizedAllMatches = async (req: Request, res: Response) => {
+    const finishedAwayMatches = await this.service.getFinalizedAllMatches();
+    return res.status(200).json(finishedAwayMatches);
+  };
 }

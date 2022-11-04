@@ -13,7 +13,7 @@ export default class SequelizeLoginRepository {
     const result = await UserSequelize.findOne({
       where: { id },
     });
-    // console.log(result);
+
     return result;
   };
 }

@@ -6,4 +6,5 @@ const matchesController = MatchesFactory.make();
 
 leaderboardRouter.get('/home', (req, res) => matchesController.getFinalizedHomeMatches(req, res));
 leaderboardRouter.get('/away', (req, res) => matchesController.getFinalizedAwayMatches(req, res));
+leaderboardRouter.get('/', (req, res) => matchesController.getFinalizedAllMatches(req, res));
 export default leaderboardRouter;

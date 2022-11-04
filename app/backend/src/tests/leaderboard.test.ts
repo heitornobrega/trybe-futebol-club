@@ -18,6 +18,14 @@ describe('Rotas', () => {
       const httpResponse = chai.request(app).get('/leaderboard/home');
       expect((await httpResponse).status).to.equal(200)
     })
+    it('deve retornar status 200', async () => {
+      const httpResponse = chai.request(app).get('/leaderboard/away');
+      expect((await httpResponse).status).to.equal(200)
+    })
+    it('deve retornar status 200', async () => {
+      const httpResponse = chai.request(app).get('/leaderboard');
+      expect((await httpResponse).status).to.equal(200)
+    })
   })
   })
   

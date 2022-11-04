@@ -2,6 +2,7 @@ import getAwayLeaderboard from '../utils/getAwayLeaderboard';
 import SequelizeMatchesRepository,
 { ICreateMatche, IUpdateMatcheGoals } from '../repositories/SequelizeMatchesRepository';
 import getHomeLeaderboard, { IFinalizedMatches } from '../utils/getHomeLeaderboard';
+import getAllLeaderboard from '../utils/getAllLeaderboard';
 
 export default class MatchesService {
   constructor(private repository: SequelizeMatchesRepository) { }
@@ -46,5 +47,11 @@ export default class MatchesService {
     const result = await this.repository.getAllFinished();
     const away = getAwayLeaderboard(result as unknown as IFinalizedMatches[]);
     return away;
+  };
+
+  getFinalizedAllMatches = async () => {
+    const result = await this.repository.getAllFinished();
+    const all = getAllLeaderboard(result as unknown as IFinalizedMatches[]);
+    return all;
   };
 }
