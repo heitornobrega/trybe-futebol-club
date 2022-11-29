@@ -1,9 +1,9 @@
-import * as express from "express";
-import error from "./middlewares/error";
-import leaderboardRouter from "./routes/leaderboardRouter";
-import loginRouter from "./routes/loginRouter";
-import matchesRouter from "./routes/matchesRouter";
-import teamsRouter from "./routes/teamsRouter";
+import * as express from 'express';
+import error from './middlewares/error';
+import leaderboardRouter from './routes/leaderboardRouter';
+import loginRouter from './routes/loginRouter';
+import matchesRouter from './routes/matchesRouter';
+import teamsRouter from './routes/teamsRouter';
 // import userRouter from './routes/userRouter';
 
 class App {
@@ -15,7 +15,7 @@ class App {
     this.config();
 
     // Não remover essa rota.
-    this.app.get("/", (req, res) => res.json({ ok: true }));
+    this.app.get('/', (req, res) => res.json({ ok: 'teste' }));
     this.routes();
 
     this.app.use(error);
@@ -24,12 +24,12 @@ class App {
   // modi
   private config(): void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "*");
+      res.header('Access-Control-Allow-Origin', '*');
       res.header(
-        "Access-Control-Allow-Methods",
-        "GET,POST,DELETE,OPTIONS,PUT,PATCH"
+        'Access-Control-Allow-Methods',
+        'GET,POST,DELETE,OPTIONS,PUT,PATCH',
       );
-      res.header("Access-Control-Allow-Headers", "*");
+      res.header('Access-Control-Allow-Headers', '*');
       next();
     };
 
@@ -38,16 +38,14 @@ class App {
   }
 
   private routes(): void {
-    this.app.use("/login", loginRouter);
-    this.app.use("/teams", teamsRouter);
-    this.app.use("/matches", matchesRouter);
-    this.app.use("/leaderboard", leaderboardRouter);
+    this.app.use('/login', loginRouter);
+    this.app.use('/teams', teamsRouter);
+    this.app.use('/matches', matchesRouter);
+    this.app.use('/leaderboard', leaderboardRouter);
   }
 
   public start(PORT: string | number): void {
-    this.app.listen(PORT as any, "0.0.0.0", () =>
-      console.log(`Running on port ${PORT}`)
-    );
+    this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
   }
 }
 
