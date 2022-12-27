@@ -1,4 +1,9 @@
-name: "my-app"
-steps:
-  - run: "docker-compose up -d"
+version: "2.0"
+
+services:
+  app:
+    build:
+      context: "./app"
+      dockerfile: "Dockerfile"
+    command: "docker-compose up -d"
     working_directory: "./app"
