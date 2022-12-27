@@ -1,9 +1,24 @@
-version: "2.0"
-
 services:
-  app:
-    build:
-      context: "./app"
-      dockerfile: "Dockerfile"
-    command: "docker-compose up -d"
-    working_directory: "./app"
+  - type: web
+    env: docker
+    name: tfc-prod-backend1
+    rootDir: app/backend
+    dockerfilePath: .app/backend/Dockerfile
+    dockerContext: .app/backend/src
+
+  - type: web
+    env: docker
+    name: tfc-prod-frontend1
+    rootDir: app/frontend
+    dockerfilePath: .app/frontend/Dockerfile
+    dockerContext: .app/frontend/src
+
+databases:
+  - name: elephant
+    databaseName: mydb # optional (Render may add a suffix)
+    user: adrian # optional
+    ipAllowList: # optional (defaults to allow all)
+      - source: 203.0.113.4/30
+        description: office
+      - source: 198.51.100.1
+        description: home
