@@ -12,13 +12,3 @@ services:
     rootDir: app/frontend
     dockerfilePath: .app/frontend/Dockerfile
     dockerContext: .app/frontend/src
-
-databases:
-  - name: elephant
-    databaseName: mydb # optional (Render may add a suffix)
-    user: adrian # optional
-    ipAllowList: # optional (defaults to allow all)
-      - source: 203.0.113.4/30
-        description: office
-      - source: 198.51.100.1
-        description: home
