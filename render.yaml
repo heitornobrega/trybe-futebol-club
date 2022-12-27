@@ -1,7 +1,7 @@
 services:
   frontend:
     build:
-      context: ./frontend
+      context: ./app/frontend
     ports:
       - 3000:3000
     working_dir: /app-frontend
@@ -15,7 +15,7 @@ services:
   backend:
     container_name: app_backend
     build:
-      context: ./backend
+      context: ./app/backend
     ports:
       - 3001:3001
     working_dir: /app-backend
