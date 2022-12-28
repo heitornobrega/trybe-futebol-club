@@ -1,14 +1,12 @@
 services:
   - type: web
-    env: docker
+    env: node
     name: tfc-prod-backend1
-    rootDir: app/backend
-    dockerfilePath: .app/backend/Dockerfile
-    dockerContext: .app/backend/src
+    repo:
 
   - type: web
-    env: docker
+    env: static
     name: tfc-prod-frontend1
-    rootDir: app/frontend
-    dockerfilePath: .app/frontend/Dockerfile
-    dockerContext: .app/frontend/src
+
+databases:
+  - name: tfc-prod-db1
