@@ -1,12 +1,7 @@
 services:
   - type: web
-    env: docker
+    env: node
     name: tfc-prod-backend1
-    repo:
-
-  - type: web
-    env: static
-    name: tfc-prod-frontend1
-
-databases:
-  - name: tfc-prod-db1
+    repo: https://github.com/heitornobrega/trybe-futebol-club.git
+    buildCommand: cd app/backend; npm run build
+    startCommand: cd app/backend; npm start
