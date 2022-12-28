@@ -1,6 +1,6 @@
 services:
   - type: web
-    env: node
+    env: docker
     name: tfc-prod-backend1
     repo:
 
